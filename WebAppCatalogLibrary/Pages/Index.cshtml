@@ -1,0 +1,84 @@
+﻿@page "{handler?}"
+
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="d-grid justify-content-end">
+    <button class="btn btn-primary m-3" type="button" onclick="onClick_ModalWindow_CreateNewBook()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+        </svg>
+        Добавить
+    </button>
+</div>
+
+<div id="example-table"></div>
+
+<div class="modal bg-dark bg-opacity-50" tabindex="-1" id="exampleModal">
+    <div id="modalMain" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-title" class="modal-title">Новая книга</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="onClick_ModalWindow_Close()"></button>
+            </div>
+            <form id="main-form" class="modal-body" method="post">
+                <div class="d-grid">
+                    <div class="row">
+                        <label class="col form-label">Название</label>
+                        <label class="col-3 form-label">Том</label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" type="text" name="config.title" />
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" type="number" name="config.tom" min="0" max="100"/>
+                        </div>
+                    </div>
+
+                    <label class="form-label">Автор(-ы)</label>
+                    <select id="select-authors" name="config.author" multiple data-coreui-search="true">
+                        @foreach(var item in Model.Authors)
+                        {
+                            <option value="@item.IdAuthor">@string.Format("{0} {2} {1}", item.FirstName, item.SecondName, item.MiddleName)</option>
+                        }  
+                    </select>
+
+                    <label class="form-label">Раздел</label>
+                    <select id="select-book-sections" name="config.section" single data-coreui-search="true">
+                        @foreach (var item in Model.BookSections)
+                        {
+                            <option value="@item.IdBookSection">@item.Name</option>
+                        }
+                    </select>
+
+                    <label class="form-label">Местоположение</label>
+                    <input type="text" name="config.location" class="form-control"/>
+                    <input type="text" name="json" class="visually-hidden"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="onClick_ModalWindow_Close()">Close</button>
+
+                    <button id="btnbycreate" type="submit" class="btn btn-primary visually-hidden" asp-page-handler="bycreate" >Сохранить</button>
+                    <button id="btnbyupdate" type="submit" class="btn btn-primary visually-hidden" asp-page-handler="byupdate">Обновить</button>
+                    <button id="btnbydelete" type="submit" class="visually-hidden" asp-page-handler="bydelete"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>var data_table = @Model.BooksJsonSerialization;</script>
+    <script src="/js/data-loader.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+}

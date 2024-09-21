@@ -1,0 +1,36 @@
+version: '3.4'
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+
+services:
+  postgres:
+    image: postgres:16.4
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - "./data:/var/lib/postgresql/data/pgdata"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+  webappcataloglibrary:
+    image: ${DOCKER_REGISTRY-}webappcataloglibrary
+    build:
+      context: .
+      dockerfile: WebAppCatalogLibrary/Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.3
+    depends_on:
+      - postgres
