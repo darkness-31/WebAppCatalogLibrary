@@ -43,7 +43,7 @@
                     <select id="select-authors" name="config.author" multiple data-coreui-search="true">
                         @foreach(var item in Model.Authors)
                         {
-                            <option value="@item.IdAuthor">@string.Format("{0} {2} {1}", item.FirstName, item.SecondName, item.MiddleName)</option>
+                            <option value="@item.AuthorId">@string.Format("{0} {2} {1}", item.FirstName, item.SecondName, item.MiddleName)</option>
                         }  
                     </select>
 
@@ -51,7 +51,7 @@
                     <select id="select-book-sections" name="config.section" single data-coreui-search="true">
                         @foreach (var item in Model.BookSections)
                         {
-                            <option value="@item.IdBookSection">@item.Name</option>
+                            <option value="@item.BookSectionId">@item.Name</option>
                         }
                     </select>
 

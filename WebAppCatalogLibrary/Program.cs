@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+
 using WebAppCatalogLibrary.DataBase.Models;
 using WebAppCatalogLibrary.DataBase.Repositories;
 
@@ -19,8 +21,23 @@ namespace WebAppCatalogLibrary
             builder.Services.AddTransient<IRepository<Author>, AuthorRepository>();
             builder.Services.AddTransient<IRepository<BookSection>, SectionRepository>();
             builder.Services.AddTransient<IRepository<AssociationBookAuthor>, AssociationBookAuthorRepository>();
-            
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<DbPostgresContext>();
+                    DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");

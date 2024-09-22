@@ -10,17 +10,23 @@ networks:
 
 services:
   postgres:
+    container_name: cool_jasper
     image: postgres:16.4
     restart: always
-    shm_size: 128mb
-    volumes:
-      - "./data:/var/lib/postgresql/data/pgdata"
+    shm_size: 128mb  
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: user
       PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data:/var/lib/postgresql/data/pgdata
     ports:
-      - 5432:5432
+      - 12734:5432
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
     networks:
       vpcbr:
         ipv4_address: 10.5.0.6

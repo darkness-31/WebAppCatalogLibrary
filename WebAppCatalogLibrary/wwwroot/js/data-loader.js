@@ -66,12 +66,12 @@ var table = new Tabulator(
         columns: [
             {
                 title: "Авторы",
-                field: "AssociationBookAuthors.IdAuthorNavigation",
+                field: "AssociationBookAuthors.Author",
                 formatter: function (cell) {
                     var data = cell.getRow().getData();
                     tmp=[]
                     var authors = data["AssociationBookAuthors"].forEach((x) => {
-                        var author = x["IdAuthorNavigation"];
+                        var author = x["Author"];
                         var strAuthor = [author["FirstName"], author["MiddleName"], author["SecondName"]].join(" ").trim();
                         tmp.push(strAuthor)
                     })
@@ -92,10 +92,10 @@ var table = new Tabulator(
             },
             {
                 title: "Раздел",
-                field: "SectionNavigation.Name",
+                field: "BookSection.Name",
                 formatter: function (cell) {
                     var data = cell.getRow().getData();
-                    return data["SectionNavigation"]["Name"];
+                    return data["BookSection"]["Name"];
                 },
             },
             {
@@ -139,11 +139,11 @@ var table = new Tabulator(
                             $('#select-authors').val('').change();
                             var authors = [];
                             data.AssociationBookAuthors.forEach((x) => {
-                                authors.push(x.IdAuthor);
+                                authors.push(x.AuthorId);
                             });
                             $('#select-authors').val(authors).change();
 
-                            form.elements['config.section'].value = data.SectionNavigation.IdBookSection;
+                            form.elements['config.section'].value = data.BookSection.BookSectionId;
                             form.elements['config.location'].value = data.Location;
                             form.elements['json'].value = json;
                         }

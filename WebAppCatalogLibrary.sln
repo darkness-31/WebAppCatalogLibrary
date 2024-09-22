@@ -6,8 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppCatalogLibrary", "WebAppCatalogLibrary\WebAppCatalogLibrary.csproj", "{AD996D8D-92C4-4AB3-BD04-032CCD047C42}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{45A2CAE0-6E22-4197-9BA3-76A4EFEFA034}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00} = {C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCatalogLibrary.DataBase", "..\WebAppCatalogLibrary.DataBase\WebAppCatalogLibrary.DataBase.csproj", "{CFF7DE3F-6DDB-49E6-B51F-186CE44E8BE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppCatalogLibrary.DataBase", "WebAppCatalogLibrary.DataBase\WebAppCatalogLibrary.DataBase.csproj", "{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +26,10 @@ Global
 		{45A2CAE0-6E22-4197-9BA3-76A4EFEFA034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45A2CAE0-6E22-4197-9BA3-76A4EFEFA034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45A2CAE0-6E22-4197-9BA3-76A4EFEFA034}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFF7DE3F-6DDB-49E6-B51F-186CE44E8BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFF7DE3F-6DDB-49E6-B51F-186CE44E8BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFF7DE3F-6DDB-49E6-B51F-186CE44E8BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFF7DE3F-6DDB-49E6-B51F-186CE44E8BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C52F58C7-33F7-4B2E-9996-8D32ABCF8E00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
